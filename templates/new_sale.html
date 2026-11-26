@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}New sale{% endblock %}
+{% block content %}
+<h1 class="h3 mb-4">New sale</h1>
+<form method="post" class="card card-body" style="max-width: 480px">
+  <label class="form-label" for="medicineId">Medicine</label>
+  <select class="form-select mb-3" id="medicineId" name="medicineId" required>
+    {% for m in medicines %}
+    <option value="{{ m.medicineId }}">{{ m.medicineName }} {{ m.dosage }} ({{ "%.2f"|format(m.unitPrice) }}){{ ' - Rx' if m.prescriptionRequired }}</option>
+    {% endfor %}
+  </select>
+  <label class="form-label" for="quantity">Quantity</label>
+  <input class="form-control mb-3" id="quantity" name="quantity" type="number" min="1" value="1" required>
+  <label class="form-label" for="paymentMethod">Payment method</label>
+  <select class="form-select mb-3" id="paymentMethod" name="paymentMethod" required>
+    {% for p in payment_methods %}<option>{{ p }}</option>{% endfor %}
+  </select>
+  <button class="btn btn-success">Record sale</button>
+</form>
+{% endblock %}

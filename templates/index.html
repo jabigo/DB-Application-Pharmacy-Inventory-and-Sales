@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 class="h3 mb-4">Dashboard</h1>
+<div class="row g-4">
+  <div class="col-lg-5">
+    <h2 class="h5">Low stock</h2>
+    <table class="table table-sm table-bordered bg-white">
+      <thead><tr><th>Medicine</th><th>In stock</th></tr></thead>
+      {% for r in low_stock %}
+      <tr><td>{{ r.medicineName }}</td><td>{{ r.stock }}</td></tr>
+      {% else %}
+      <tr><td colspan="2" class="text-muted">Nothing is running low.</td></tr>
+      {% endfor %}
+    </table>
+  </div>
+  <div class="col-lg-7">
+    <h2 class="h5">Expired or expiring within 90 days</h2>
+    <table class="table table-sm table-bordered bg-white">
+      <thead><tr><th>Medicine</th><th>Batch</th><th>Expires</th><th>Qty</th><th>Status</th></tr></thead>
+      {% for r in expiring %}
+      <tr>
+        <td>{{ r.medicineName }}</td><td>{{ r.batchNumber }}</td>
+        <td>{{ r.expirationDate }}</td><td>{{ r.quantityRemaining }}</td>
+        <td><span class="badge {{ 'text-bg-danger' if r.status == 'Expired' else 'text-bg-warning' }}">{{ r.status }}</span></td>
+      </tr>
+      {% else %}
+      <tr><td colspan="5" class="text-muted">No batches are expiring soon.</td></tr>
+      {% endfor %}
+    </table>
+  </div>
+  <div class="col-12">
+    <h2 class="h5">Recent sales</h2>
+    <table class="table table-sm table-bordered bg-white">
+      <thead><tr><th>Sale</th><th>Date</th><th>Payment</th><th>Items</th><th>Total</th></tr></thead>
+      {% for s in sales %}
+      <tr>
+        <td>#{{ s.transactionId }}</td><td>{{ s.transactionDatetime }}</td>
+        <td>{{ s.paymentMethod }}</td><td>{{ s.itemCount }}</td><td>{{ "%.2f"|format(s.total) }}</td>
+      </tr>
+      {% else %}
+      <tr><td colspan="5" class="text-muted">No sales yet. <a href="{{ url_for('new_sale') }}">Record the first sale.</a></td></tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+{% endblock %}
