@@ -1,12 +1,12 @@
 # DB-Application-Group-7-Pharmacy-Inventory-and-Sales
 ## Setup (One time)
 
-1. **Install the Python packages.** From the repository's top folder:
+1. **Install the dependencies.** From the repository's top folder:
    ```
    pip install -r requirements.txt
    ```
 2. **Create the database.** In MySQL Workbench, connect to your local server, open `database/pharmacyDb.sql`, and run the whole script.
-   This creates the tables, loads the sample data, and adds the views, triggers, and procedure. Running it again resets the data to the sample set.
+   This loads the dummy data into the created tables and some of the views, triggers, and procedure
 
 ## Running the app
 
