@@ -15,7 +15,6 @@
 
    | Terminal | Command |
    |---|---|
-   | PowerShell | `$env:DB_PASSWORD="your_password"` |
    | Command Prompt | `set "DB_PASSWORD=your_password"` |
    | Git Bash / macOS / Linux | `export DB_PASSWORD='your_password'` |
 
